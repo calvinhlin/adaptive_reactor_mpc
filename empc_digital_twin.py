@@ -1683,6 +1683,7 @@ def main() -> None:
                    fontsize=8, framealpha=0.8)
     fig_fp.tight_layout()
     fp_png = WORKSPACE / "plots" / "empc_flow_vs_price.png"
+    fp_png.parent.mkdir(parents=True, exist_ok=True)
     fig_fp.savefig(fp_png, dpi=150)
     _plt_static.close(fig_fp)
     print(f"  saved {fp_png}")
