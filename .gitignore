@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.cache_q*.npz
+~$*
+plots/
+*.gif
+.ipynb_checkpoints/
+.DS_Store

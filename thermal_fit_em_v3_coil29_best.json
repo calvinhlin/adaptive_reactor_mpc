@@ -1,0 +1,174 @@
+{
+  "variant": "full_greybox_em_v3_coil29",
+  "parameters": [
+    {
+      "name": "emissivity",
+      "value": 0.0,
+      "unit": "-",
+      "lower": 0.0,
+      "upper": 1.0,
+      "interpretation": "Effective surface emissivity for radiative loss."
+    },
+    {
+      "name": "h_flow",
+      "value": 0.0,
+      "unit": "W/(m^2.K)/SLPM^n",
+      "lower": 0.0,
+      "upper": 150.0,
+      "interpretation": "Forced-convection loss gain: extra wall loss per SLPM^n_flow of nitrogen."
+    },
+    {
+      "name": "n_flow",
+      "value": 1.0,
+      "unit": "-",
+      "lower": 0.3,
+      "upper": 1.0,
+      "interpretation": "Flow exponent for forced convection (Nu ~ Re^n)."
+    },
+    {
+      "name": "rho_cp",
+      "value": 1485804.1228675423,
+      "unit": "J/(m^3.K)",
+      "lower": 100000.0,
+      "upper": 10000000.0,
+      "interpretation": "Volumetric heat capacity rho*Cp of the susceptor (thermal mass per unit volume)."
+    },
+    {
+      "name": "cp_T1",
+      "value": -0.0003586467333703546,
+      "unit": "1/K",
+      "lower": -0.0005,
+      "upper": 0.0025,
+      "interpretation": "Linear temperature coefficient of Cp: Cp(T)=rho_cp*(1+cp_T1*(T-Tref))."
+    },
+    {
+      "name": "k_w",
+      "value": 0.6486386394470849,
+      "unit": "W/(m.K)",
+      "lower": 0.5,
+      "upper": 400.0,
+      "interpretation": "Effective axial thermal conductivity of the susceptor (lumps solid conduction plus internal radiative/gas axial transport)."
+    },
+    {
+      "name": "kT1",
+      "value": 0.01282337863682125,
+      "unit": "1/K",
+      "lower": -0.0015,
+      "upper": 0.02,
+      "interpretation": "Linear temperature coefficient of k: k(T)=k_w*(1+kT1*(T-Tref))."
+    },
+    {
+      "name": "h0",
+      "value": 9.197787232862282,
+      "unit": "W/(m^2.K)",
+      "lower": 0.1,
+      "upper": 200.0,
+      "interpretation": "Baseline (natural-convection + conduction-through-insulation) loss coefficient."
+    },
+    {
+      "name": "h_T",
+      "value": 0.0009755551853842473,
+      "unit": "W/(m^2.K)/K",
+      "lower": 0.0,
+      "upper": 0.6,
+      "interpretation": "Temperature dependence of the loss coefficient (h grows with wall-ambient delta)."
+    },
+    {
+      "name": "sigma_sus",
+      "value": 48.49532399313454,
+      "unit": "S/m",
+      "lower": 1.0,
+      "upper": 500.0,
+      "interpretation": "Effective electrical conductivity of the susceptor at Tref (300 \u00b0C). Determines the skin depth delta=1/sqrt(mu0*pi*f*sigma) and the Bessel-function EM coupling factor Im(J2(z)/J0(z)) that converts the Biot-Savart B\u00b2(x) field into induction power per unit axial length: P(x) = 2*(omega/mu0)*A_cross * sigma_coupling_factor * |B(x)|^2. Replaces the empirical 'power_scale / B2_REF' normalization with a physically grounded EM formula (matches compute_power_density in bio_savart_1d.py)."
+    },
+    {
+      "name": "sigma_T1",
+      "value": 0.000819489427654582,
+      "unit": "1/K",
+      "lower": -0.005,
+      "upper": 0.005,
+      "interpretation": "Temperature coefficient of susceptor conductivity: sigma(T) = sigma_sus * clip(1 + sigma_T1*(T-Tref), 0.01, 100). Negative for metals and graphitic materials (conductivity falls with temperature), which causes the Bessel coupling factor \u2014 and thus induction power \u2014 to vary with temperature.  Replaces the empirical ps_T1/ps_T2 correction with a physics-based skin-depth mechanism."
+    },
+    {
+      "name": "h_gw",
+      "value": 99999.99999999993,
+      "unit": "W/(m^2.K)",
+      "lower": 0.5,
+      "upper": 100000.0,
+      "interpretation": "Wall-to-gas heat-transfer coefficient for the advected nitrogen field."
+    },
+    {
+      "name": "inlet_c",
+      "value": 199.9999998805214,
+      "unit": "degC",
+      "lower": 10.0,
+      "upper": 200.0,
+      "interpretation": "Nitrogen inlet temperature at the left boundary (advection)."
+    },
+    {
+      "name": "h_end_left",
+      "value": 0.020668198610259626,
+      "unit": "W/K",
+      "lower": 0.001,
+      "upper": 50.0,
+      "interpretation": "Heat-loss conductance at the LEFT end face (gas inlet side) to the inlet temperature. Explains the cold upstream end despite end-peaked coil power."
+    },
+    {
+      "name": "h_end_right",
+      "value": 0.04621611112532636,
+      "unit": "W/K",
+      "lower": 0.001,
+      "upper": 50.0,
+      "interpretation": "Heat-loss conductance at the RIGHT end face (outlet side) to ambient."
+    },
+    {
+      "name": "end_flow_gain",
+      "value": 3.8440855757964526e-14,
+      "unit": "1/SLPM",
+      "lower": 0.0,
+      "upper": 5.0,
+      "interpretation": "Flow enhancement of the left end-face loss: h_end_left*(1+end_flow_gain*flow)."
+    },
+    {
+      "name": "shell_C",
+      "value": 3454.509943772878,
+      "unit": "J/K",
+      "lower": 100.0,
+      "upper": 3000000.0,
+      "interpretation": "Lumped heat capacity of the insulation/support shell (the slow second thermal mass that produces the long within-run upward drift)."
+    },
+    {
+      "name": "shell_G",
+      "value": 1.1707156345315604,
+      "unit": "W/K",
+      "lower": 0.001,
+      "upper": 80.0,
+      "interpretation": "Conductance from the insulation shell to ambient."
+    },
+    {
+      "name": "shell_init_frac",
+      "value": 0.16889816679341235,
+      "unit": "-",
+      "lower": 0.0,
+      "upper": 1.0,
+      "interpretation": "Initial shell temperature as a fraction of (mean initial wall - ambient) above ambient."
+    },
+    {
+      "name": "ambient_c",
+      "value": 199.99999998984177,
+      "unit": "degC",
+      "lower": 10.0,
+      "upper": 200.0,
+      "interpretation": "Ambient temperature for convective + radiative loss."
+    },
+    {
+      "name": "tau_sensor",
+      "value": 23.43765285987348,
+      "unit": "s",
+      "lower": 1.0,
+      "upper": 3600.0,
+      "interpretation": "Effective first-order thermal lag between the susceptor wall and the fiber-optic reading. In practice this lumps sensor thermal inertia, the gas column between wall and fiber, and any mounting-structure lag.  Larger values (hundreds of seconds) are physically plausible when the fiber reads the gas inside the tube rather than the wall directly. IIR: T_s[k]=exp(-dt/tau)*T_s[k-1]+(1-exp(-dt/tau))*T_wall[k]."
+    }
+  ],
+  "selection_rmse_c": 5.39187457117987
+}
